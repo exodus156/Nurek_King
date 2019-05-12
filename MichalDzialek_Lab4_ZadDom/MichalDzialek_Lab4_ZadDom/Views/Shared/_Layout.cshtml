@@ -1,0 +1,82 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] - Nurek King</title>
+
+    <environment include="Development">
+        <link href="~/css/materialize.min.css" rel="stylesheet" type="text/css" media="screen,projection" />
+        <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css" integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous" />
+        <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    </environment>
+    <environment exclude="Development">
+        <link href="~/css/materialize.min.css" rel="stylesheet" type="text/css" media="screen,projection" />
+        <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css" integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous" />
+        <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    </environment>
+
+    <style>
+        #header {
+            background: url(@Url.Content("~/images/Headers/2.jpg"));
+            background-size: cover;
+            background-position: center;
+            min-height: 500px;
+        }
+        .pasek{
+            font-weight: bold;
+        }
+        .pasek_tytul{
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body class="grey lighten-3">
+    <header id="header">
+        <nav class="nav-wrapper deep-purple darken-4">
+            <div class="container">
+                @Html.ActionLink("Nurek King", "Index", "Home", null, new { @class="brand-logo white-text pasek_tytul" })
+                <a href="#" class="sidenav-trigger" data-target="mobile-links">
+                    <i class="material-icons">menu</i>
+                </a>
+                <!--Pasek nawigacji dla stron w rozmiarze nie mobilnym-->
+                <ul class="right hide-on-med-and-down">
+                    <li>@Html.ActionLink("Automaty", "Automaty", "Home", null, new { @class = "white-text pasek" })</li>
+                    <li>@Html.ActionLink("Boje", "Boje", "Home", null, new { @class = "white-text pasek" })</li>
+                    <li>@Html.ActionLink("Butle", "Butle", "Home", null, new { @class = "white-text pasek" })</li>
+                    <li>@Html.ActionLink("Kamizelki", "Kamizelki", "Home", null, new { @class = "white-text pasek" })</li>
+                    <li>@Html.ActionLink("Skafandry", "Skafandry", "Home", null, new { @class = "white-text pasek" })</li>
+                </ul>
+                <!--Pasek nawigacji dla stron w rozmiarze mobilnym-->
+                <ul class="sidenav deep-purple darken-4" id="mobile-links">
+                    <li>@Html.ActionLink("Automaty", "Automaty", "Home", null, new { @class = "white-text pasek sidenav-close" })</li>
+                    <li>@Html.ActionLink("Boje", "Boje", "Home", null, new { @class = "white-text pasek sidenav-close" })</li>
+                    <li>@Html.ActionLink("Butle", "Butle", "Home", null, new { @class = "white-text pasek sidenav-close" })</li>
+                    <li>@Html.ActionLink("Kamizelki", "Kamizelki", "Home", null, new { @class = "white-text pasek sidenav-close" })</li>
+                    <li>@Html.ActionLink("Skafandry", "Skafandry", "Home", null, new { @class = "white-text pasek sidenav-close" })</li>
+                </ul>
+            </div>
+        </nav>
+    </header>
+    <section class="container">
+       @RenderBody();
+    </section>
+
+    <environment include="Development">
+        <script src="https://code.jquery.com/jquery-3.4.1.min.js"
+                integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo="
+                crossorigin="anonymous" defer></script>
+        <script type="text/javascript" src="~/js/materialize.min.js" defer></script>
+        <script type="text/javascript" src="~/js/index.js" defer></script>
+    </environment>
+    <environment exclude="Development">
+        <script src="https://code.jquery.com/jquery-3.4.1.min.js"
+                integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo="
+                crossorigin="anonymous" defer></script>
+        <script type="text/javascript" src="~/js/materialize.min.js" defer></script>
+        <script type="text/javascript" src="~/js/index.js" defer></script>
+    </environment>
+
+    @RenderSection("Scripts", required: false)
+</body>
+</html>

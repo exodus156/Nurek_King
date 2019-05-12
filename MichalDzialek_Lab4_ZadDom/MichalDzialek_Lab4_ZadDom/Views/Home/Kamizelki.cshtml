@@ -1,0 +1,66 @@
+﻿@model List<ObjectTemplateModel>
+
+@{
+    ViewData["Title"] = "Kamizelki";
+}
+<div class="row" style="margin-top: 40px">
+    @foreach (var Kamizelki in Model)
+    {<!--kolumna na karty-->
+        <div class="col s12 l4">
+            <div class="card small">
+                <div class="card-image waves-effect waves-block waves-dark">
+                    <!--Zdjęcie karty-->
+                    <img class="activator responsive-img" src="@Url.Content(Kamizelki.Photo)">
+                </div>
+                <!--Zawartość karty-->
+                <div class="card-content">
+                    <span class="card-title activator deep-purple-text text-accent-4">@Kamizelki.Name<i class="material-icons right">more_vert</i></span>
+                    <!--Ukryty input i przycisk submit do tego-->
+                    <input type="hidden" id="@Kamizelki.ID" value="@Kamizelki.ID" />
+                    <button class="btn waves-effect waves-light deep-purple accent-4 center-align" type="submit" onclick="proceed('@Kamizelki.ID');">Więcej info</button>
+                </div>
+                <!--Zawartość karty po kliknięciu na zdjęcie-->
+                <div class="card-reveal">
+                    <span class="card-title deep-purple-text text-accent-4">@Kamizelki.Name<i class="material-icons right">close</i></span>
+                    <p><h5>Cena:</h5>@Kamizelki.Price</p>
+                    <p><h5>Typ:</h5>@Kamizelki.Type</p>
+                    <p><h5>Opis:</h5>@Kamizelki.Description</p>
+                </div>
+            </div>
+        </div>
+    }
+</div>
+
+<script>
+    //Włączenie przesyłu danych używając AJAX
+    function proceed(id) {
+        var target = "#" + id
+
+        //Targetuje id przycisku, które jest dynamiczne
+        var ID = $(target).val();
+
+        //Zmienia go na format jaki znajduje się w IdModel.cs
+        var obj = {
+            IdPrzycisku: ID
+        }
+
+        //aktywuje funkcję Submit
+        Submit(obj);
+    }
+
+    //Sam AJAX
+    function Submit(obj) {
+        $.ajax({
+            //Namierza stronę
+            url: '@Url.Action("Kamizelki", "Home")',
+            //Typ zapytania
+            type: 'POST',
+            //Dane przesłane
+            data: obj,
+            //Bierze odpowiedź z serwera, która jest kodem z ViewModel i wkleja ją do dokumentu
+            success: function (res) {
+                document.write(res);
+            }
+        })
+    }
+</script>
